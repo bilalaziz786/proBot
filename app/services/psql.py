@@ -45,12 +45,11 @@ class PSQL:
             'user': os.getenv('PSQL_USER'),
             'password': os.getenv('PSQL_PASSWORD'),
             'host': os.getenv('DATABASE_URL'),
-            'port': int(os.getenv('PSQL_PORT')),
-            'sslmode': 'require'
+            'port': int(os.getenv('PSQL_PORT'))
         }
         try:
             # connecting to psql server
-            connection = psycopg2.connect(**psql_credentials)
+            connection = psycopg2.connect(**psql_credentials, sslmode='require')
             print("Connected successfully to PostgreSQL Server.")
         except Exception as e:
             print("ERROR: Unable to connect to PostgreSQL Server. - {}".format(e))
