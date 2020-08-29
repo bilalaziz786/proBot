@@ -5,9 +5,11 @@ import psycopg2
 from psycopg2.extras import execute_values, DictCursor
 
 from app.constants import TABLE_NAME, TABLE_COLUMNS
-from utilities.logger import LoggerManager
 
-logger = LoggerManager.get_logger()
+
+# from utilities.logger import LoggerManager
+#
+# logger = LoggerManager.get_logger()
 
 
 class PSQL:
@@ -49,9 +51,9 @@ class PSQL:
         try:
             # connecting to psql server
             connection = psycopg2.connect(**psql_credentials)
-            logger.info("Connected successfully to PostgreSQL Server.")
+            print("Connected successfully to PostgreSQL Server.")
         except Exception as e:
-            logger.error("ERROR: Unable to connect to PostgreSQL Server. - {}".format(e))
+            print("ERROR: Unable to connect to PostgreSQL Server. - {}".format(e))
             sys.exit()
 
         return connection

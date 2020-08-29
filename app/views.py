@@ -3,9 +3,11 @@ from datetime import datetime
 from app import app
 from app.services.googlesearch import GoogleSearch
 from app.services.psql import DBService
-from utilities.logger import LoggerManager
 
-logger = LoggerManager.get_logger()
+
+# from utilities.logger import LoggerManager
+#
+# logger = LoggerManager.get_logger()
 
 
 @app.event
@@ -35,7 +37,7 @@ async def on_message(message):
 
                 # searching from google column.
                 if '!google' in contents:
-                    logger.info("Google Search for contents: {} from username: {}".format(
+                    print("Google Search for contents: {} from username: {}".format(
                         searched_item, message.author.name))
                     try:
                         # adding searched google query in db.
@@ -51,10 +53,10 @@ async def on_message(message):
                     except Exception as e:
                         response = "Error Found during Google Search for contents: {} with error_details: {}".format(
                             contents, str(e))
-                        logger.error(response)
+                        print(response)
                 elif '!recent' in contents:
                     try:
-                        logger.info("Recent Search for contents: {} from username: {}".format(
+                        print("Recent Search for contents: {} from username: {}".format(
                             searched_item, message.author.name))
 
                         # searching in db for searched query.
@@ -71,7 +73,7 @@ async def on_message(message):
                     except Exception as e:
                         response = "Error Found during Recent Search for contents: {} with error_details: {}".format(
                             contents, str(e))
-                        logger.error(response)
+                        print(response)
                 else:
                     response = "Message not found."
             else:
@@ -79,5 +81,5 @@ async def on_message(message):
         await message.channel.send(response)
     except Exception as e:
         msg = "Bot Down: Due to error: {}".format(str(e))
-        logger.error(msg)
+        print(msg)
         await message.channel.send(msg)
