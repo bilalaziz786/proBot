@@ -42,8 +42,9 @@ class PSQL:
             'database': os.getenv('PSQL_DB'),
             'user': os.getenv('PSQL_USER'),
             'password': os.getenv('PSQL_PASSWORD'),
-            'host': os.getenv('PSQL_HOST'),
-            'port': int(os.getenv('PSQL_PORT'))
+            'host': os.getenv('DATABASE_URL'),
+            'port': int(os.getenv('PSQL_PORT')),
+            'sslmode': 'require'
         }
         try:
             # connecting to psql server
