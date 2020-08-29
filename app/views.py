@@ -33,7 +33,7 @@ async def on_message(message):
 
                 # retrieve searched item from message
                 searched_item = ' '.join(contents[1:])
-                db_conn = DBService()
+                # db_conn = DBService()
 
                 # searching from google column.
                 if '!google' in contents:
@@ -41,12 +41,12 @@ async def on_message(message):
                         searched_item, message.author.name))
                     try:
                         # adding searched google query in db.
-                        db_conn.add_record(
-                            add_record=(
-                                searched_item,
-                                message.author.name,
-                                str(datetime.now()))
-                        )
+                        # db_conn.add_record(
+                        #     add_record=(
+                        #         searched_item,
+                        #         message.author.name,
+                        #         str(datetime.now()))
+                        # )
                         # searching through google search api.
                         data = GoogleSearch.search(searched_item)
                         response = "Found Some Links for Your Query:\n" + data
@@ -54,26 +54,26 @@ async def on_message(message):
                         response = "Error Found during Google Search for contents: {} with error_details: {}".format(
                             contents, str(e))
                         print(response)
-                elif '!recent' in contents:
-                    try:
-                        print("Recent Search for contents: {} from username: {}".format(
-                            searched_item, message.author.name))
-
-                        # searching in db for searched query.
-                        data = db_conn.search_query(query=searched_item)
-
-                        if any(data):
-                            response = "Result for your search:\n"
-                            count = 1
-                            for each in data:
-                                response += str(count) + ". Content: {} -- By: {}\n".format(each[0], each[1])
-                                count += 1
-                        else:
-                            response = "No Result Found for your query."
-                    except Exception as e:
-                        response = "Error Found during Recent Search for contents: {} with error_details: {}".format(
-                            contents, str(e))
-                        print(response)
+                # elif '!recent' in contents:
+                #     try:
+                #         print("Recent Search for contents: {} from username: {}".format(
+                #             searched_item, message.author.name))
+                #
+                #         # searching in db for searched query.
+                #         data = db_conn.search_query(query=searched_item)
+                #
+                #         if any(data):
+                #             response = "Result for your search:\n"
+                #             count = 1
+                #             for each in data:
+                #                 response += str(count) + ". Content: {} -- By: {}\n".format(each[0], each[1])
+                #                 count += 1
+                #         else:
+                #             response = "No Result Found for your query."
+                #     except Exception as e:
+                #         response = "Error Found during Recent Search for contents: {} with error_details: {}".format(
+                #             contents, str(e))
+                #         print(response)
                 else:
                     response = "Message not found."
             else:
