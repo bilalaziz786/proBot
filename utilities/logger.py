@@ -23,7 +23,7 @@ class LoggerManager:
         if LoggerManager.__logger is not None:
             raise Exception("This class is a singleton!")
         else:
-            handler = TimedRotatingFileHandler(BASE_PATH + '/logs/probot.log',
+            handler = TimedRotatingFileHandler(BASE_PATH + '/probot.log',
                                                when="w0",
                                                interval=1,
                                                backupCount=5)
