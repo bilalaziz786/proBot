@@ -27,6 +27,3 @@ export PSQL_HOST=localhost
 export PSQL_PASSWORD=<your-password>
 
 export DISCORD_TOKEN="<your-token>"
-
-# Add Log Folder
-mkdir base-dir/logs
