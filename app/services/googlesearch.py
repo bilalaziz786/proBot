@@ -1,9 +1,8 @@
 from googlesearch import search
 
+from utilities.logger import LoggerManager
 
-# from utilities.logger import LoggerManager
-#
-# logger = LoggerManager.get_logger()
+logger = LoggerManager.get_logger()
 
 
 class GoogleSearch:
@@ -23,6 +22,6 @@ class GoogleSearch:
                 count += 1
             return result_string
         except Exception as e:
-            print(
+            logger.info(
                 "GoogleSearch: search: error found for query:{} with error_details: {}".format(query, str(e)))
             raise e
